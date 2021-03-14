@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +25,13 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            //İş Kodları
-            if (product.ProductName.Length < 2)
-            {
-                //magic strings Business.Constants.Messages sınıfında
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
-            _productDal.Add(product);
+            //business Codes
 
+            _productDal.Add(product);
+            
             return new SuccessResult(Messages.ProductAdded);
         }
 
@@ -38,7 +39,7 @@ namespace Business.Concrete
         {
             //İş Kodları
             //Yetkisi var mı?
-            if (DateTime.Now.Hour == 18)
+            if (DateTime.Now.Hour == 1)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
@@ -62,7 +63,7 @@ namespace Business.Concrete
 
         public IDataResult<List<ProductDetailDto>> GetProductDetails()
         {
-            if (DateTime.Now.Hour == 19)
+            if (DateTime.Now.Hour == 1)
             {
                 return new ErrorDataResult<List<ProductDetailDto>>(Messages.MaintenanceTime);
             }
