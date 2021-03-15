@@ -12,7 +12,10 @@ namespace Business.Constants
         //public field oldugu için Pascal case ile yazıldı. Private olsaydı küçük harfle başlardı.
         public static string ProductAdded = "Ürün Eklendi";
         public static string ProductNameInvalid = "Ürün ismi geçersiz";
-        public static string MaintenanceTime="Sistem bakımda";
-        public static string ProductsListed="Ürünler Listelendi";
+        public static string MaintenanceTime = "Sistem bakımda";
+        public static string ProductsListed = "Ürünler Listelendi";
+        public static string ProductCountOfCategoryError = "Bir kategoride en fazla 10 ürü olabilir";
+        public static string ProductNameAlradyExists = "Aynı isimde ürün zaten mevcut";
+        public static string CategoryLimitExceeded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
     }
 }
